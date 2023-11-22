@@ -13,16 +13,24 @@ def main():
 
 
     # Variable definitions
-    credentialFile = "credentials_anthonycardenemail.json"
-    labelName = "Google_Labels"
-    sender = 'from:googlepay-noreply@google.com'
+    # NOTE: Comment out the credential file pertaining to the gmail mailbox that you are trying to change.
+
+    ## credentialFile = "credentials_anthonycardenemail.json" # anthonycardenemail@gmail.com email credentails
+    ## jsonToken = "token_anthonycardenemail.json" # anthonycardenemail@gmail.com email credentails
+
+    credentialFile = "credentials_am88davis.json" # am88davis@gmail.com email credentials
+    jsonToken = "token_am88davis.json" # am88davis@gmail.com email credentials
+
+    labelName = "Robinhood"
+    sender = 'from:*@robinhood.com'
+    
 
 
 
     # Load existing credentials from token.json if available
-    # Checks for the "token.json". Creates the token if it's not found.
-    if os.path.exists("token.json"):
-        creds = Credentials.from_authorized_user_file("token.json", SCOPES)
+    # Checks for the jsonToken. Creates the token if it's not found.
+    if os.path.exists(jsonToken):
+        creds = Credentials.from_authorized_user_file(jsonToken, SCOPES)
 
     # If there are no (valid) credentials available, let the user log in.
     if not creds or not creds.valid:
@@ -34,6 +42,7 @@ def main():
             creds = flow.run_local_server(port=0)
 
         # Save the credentials for the next run
+        # NOTE: go to the directory and CHANGE the token name to whatever the email is that you are using.
         with open("token.json", "w") as token:
             token.write(creds.to_json())
 
